@@ -97,12 +97,15 @@ public:
     * \param major output NatNet major version
     * \param minor output NatNet minor version
     */
-   void getNatNetVersion( unsigned char& major, unsigned char& minor )
+   bool getNatNetVersion( unsigned char& major, unsigned char& minor )
    {
-      _nnVersionMutex.lock();
-      major = _nnMajor;
-      minor = _nnMinor;
-      _nnVersionMutex.unlock();
+      if (_nnVersionMutex.timed_lock(boost::get_system_time() + boost::posix_time::seconds(1))) {
+          major = _nnMajor;
+          minor = _nnMinor;
+          _nnVersionMutex.unlock();
+          return true;
+      }
+      return false;
    }
    
 private:
@@ -112,7 +115,7 @@ private:
    int _sd;
    unsigned char _nnMajor;
    unsigned char _nnMinor;
-   boost::mutex _nnVersionMutex;
+   boost::timed_mutex _nnVersionMutex;
    
    void _work(int sd)
    {

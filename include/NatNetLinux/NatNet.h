@@ -89,7 +89,7 @@ public:
       const int rcvBufSize = 0x100000;
       int sd;
       int tmp=0;
-      socklen_t len=0;
+      socklen_t len=sizeof(tmp);
       struct sockaddr_in sockAddr = createAddress(inAddr, port);
       
       sd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -213,7 +213,7 @@ public:
 };
 
 //! \brief Output operator for Point3f.
-std::ostream& operator<<( std::ostream& s, Point3f const& point )
+static std::ostream& operator<<( std::ostream& s, Point3f const& point )
 {
    std::ios::fmtflags f(s.flags());
    
@@ -362,7 +362,7 @@ private:
 };
 
 //! \brief Output operator for Quaternion4f.
-std::ostream& operator<<( std::ostream& s, Quaternion4f const& q )
+static std::ostream& operator<<( std::ostream& s, Quaternion4f const& q )
 {
    std::ios::fmtflags f(s.flags());
    
@@ -532,7 +532,7 @@ private:
 };
 
 //! \brief Output operator for RigidBody.
-std::ostream& operator<<( std::ostream& s, RigidBody const& body )
+static std::ostream& operator<<( std::ostream& s, RigidBody const& body )
 {
    s
    << "    Rigid Body: " << body.id() << std::endl
@@ -614,7 +614,7 @@ private:
 };
 
 //! \brief Output operator to print human-readable text describin a MarkerSet
-std::ostream& operator<<( std::ostream& s, MarkerSet const& set )
+static std::ostream& operator<<( std::ostream& s, MarkerSet const& set )
 {
    size_t i, size;
    
@@ -995,7 +995,7 @@ private:
 };
 
 //! \brief For displaying human-readable MocapFrame data.
-std::ostream& operator<<(std::ostream& s, MocapFrame const& frame)
+static std::ostream& operator<<(std::ostream& s, MocapFrame const& frame)
 {
    size_t i, size;
    std::ios::fmtflags flags = s.flags();

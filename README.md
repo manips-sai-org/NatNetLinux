@@ -1,5 +1,7 @@
 # NatNetLinux
 
+Forked from: https://github.com/tmigimatsu/NatNetLinux
+
 The purpose of this package is to provide a lightweight library to read
 NaturalPoint's NatNet UDP packets in Unix-based OSs.
 

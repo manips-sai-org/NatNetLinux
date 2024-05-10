@@ -10,6 +10,13 @@ SET( VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}" )
 
 OPTION( BUILD_EXAMPLES "If on, build executable examples." ON )
 
+if (${CMAKE_SYSTEM_NAME} MATCHES Linux)
+	SET(CMAKE_CXX_FLAGS "-std=c++17 -I/usr/include -I/usr/local/include -O3")
+elseif (${CMAKE_SYSTEM_NAME} MATCHES Darwin)
+	SET(CMAKE_CXX_FLAGS "-std=c++17 -I/usr/include -I/usr/local/include -I/opt/homebrew/include -w -O3")
+endif()
+SET(CMAKE_BUILD_TYPE "Release") 
+
 # Add custom CMakeModules path
 #SET( CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules ${CMAKE_MODULE_PATH} )
 
